@@ -1,0 +1,22 @@
+name: KIET DevOps Demo Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Step 1 - Fetch the code
+      uses: actions/checkout@v3
+
+    - name: Step 2 - Make scripts executable
+      run: chmod +x healthcheck.sh tests/test_health.sh
+
+    - name: Step 3 - Run the health check test
+      run: bash tests/test_health.sh
+
+    - name: Step 4 - Report success
+      run: echo "All tests passed. This code is safe to deploy."
